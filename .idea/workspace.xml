@@ -2,6 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5e0002c-06e4-40d8-89cc-8db9ec8e6512" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/css/bootswatch.min.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/font-awesome/fontawesome-webfont.eot" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/font-awesome/fontawesome-webfont.svg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/font-awesome/fontawesome-webfont.ttf" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/font-awesome/fontawesome-webfont.woff" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/public/fonts/vendor/font-awesome/fontawesome-webfont.woff2" />
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
@@ -297,7 +308,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2775000" />
+    <option name="totallyTimeSpent" value="2800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1560" height="946" extended-state="0" />
