@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootswatch.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -29,7 +30,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        TheAgileBusiness
                     </a>
                 </div>
 
@@ -52,6 +53,10 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if(auth()->user()->role == 'admin')
+                                        <li><a href="/user">Users</a></li>
+                                        <li class="divider"></li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
