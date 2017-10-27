@@ -22,9 +22,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        if (auth()->user()->role = 'admin') {
+            $users = User::all();
 
-        return view('user.index', compact('users'));
+            return view('user.admin.index', compact('users'));
+        }
     }
 
     /**
