@@ -21,7 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /* Admin User Routes */
 
-Route::get('admin/user', 'UserController@index');
-
-Route::get('admin/user/create', 'UserController@create');
+Route::resource('user', 'UserController');
 

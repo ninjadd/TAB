@@ -16,7 +16,7 @@
                         <h3 class="panel-title pull-left">
                             Users
                         </h3>
-                        <a href="/admin/user/createa" class="btn btn-info btn-xs pull-right">New User</a>
+                        <a href="/user/create" class="btn btn-info btn-xs pull-right">New User</a>
                     </div>
 
                     <div class="panel-body">

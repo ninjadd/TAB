@@ -58,10 +58,10 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    @if(auth()->user()->role == 'admin')
-                                        <li><a href="/admin/user">Users</a></li>
-                                        <li class="divider"></li>
-                                    @endif
+                                    <li><a href="/home">Dashboard</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/user">Users</a></li>
+                                    <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

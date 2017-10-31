@@ -15,30 +15,42 @@
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" autocomplete="off">
+                        <form class="form-horizontal" action="/user" method="POST" autocomplete="off">
+                            {{ csrf_field() }}
                             <fieldset>
                                 <div class="form-group">
                                     <label for="inputName" class="col-lg-2 control-label">Name</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="name" class="form-control" id="inputName" placeholder="User Name">
+                                        <input type="text" name="name" required="required" value="{{ old('name') }}" class="form-control" id="inputName" placeholder="User Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                                     <div class="col-lg-10">
-                                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                                        <input type="email" required="required" name="email" value="{{ old('email') }}" class="form-control" id="inputEmail" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                                     <div class="col-lg-10">
-                                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        <input type="password" required="required" name="password" class="form-control" id="inputPassword" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword" class="col-lg-2 control-label">Confirmation</label>
                                     <div class="col-lg-10">
-                                        <input type="password" name="password_confirmation" class="form-control" id="inputPassword" placeholder="Password Confirmation">
+                                        <input type="password" required="required" name="password_confirmation" class="form-control" id="inputPassword" placeholder="Password Confirmation">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputRole" class="col-lg-2 control-label">Role</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" required="required" name="role" id="inputRole">
+                                            <option>Select Role</option>
+                                            <option {!! (old('role') == 'admin') ? 'selected="selected"' : null !!} value="admin">Administrator</option>
+                                            <option {!! (old('role') == 'owner') ? 'selected="selected"' : null !!} value="owner">Account Admin</option>
+                                            <option {!! (old('role') == 'staff') ? 'selected="selected"' : null !!} value="staff">Account User</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
