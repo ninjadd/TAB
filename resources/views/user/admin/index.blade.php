@@ -12,7 +12,12 @@
                 @include('shared.session')
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Users</div>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title pull-left">
+                            Users
+                        </h3>
+                        <a href="/admin/user/createa" class="btn btn-info btn-xs pull-right">New User</a>
+                    </div>
 
                     <div class="panel-body">
 
@@ -41,7 +46,9 @@
                                     <td>
                                         {{ $user->created_at->toDayDateTimeString() }}
                                     </td>
-                                    <td></td>
+                                    <td>
+
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

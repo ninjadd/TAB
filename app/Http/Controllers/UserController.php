@@ -36,7 +36,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role == 'admin') {
+            return view('user.admin.create');
+        }
     }
 
     /**
