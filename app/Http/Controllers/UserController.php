@@ -84,7 +84,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if (auth()->user()->role == 'admin') {
+            return view('user.admin.edit', compact('user'));
+        }
     }
 
     /**
@@ -96,17 +98,34 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string',
+            'email' => 'required|string|email'
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if (!empty($request->password)) {
+            if ($request->password == $request->password_confirmation) {
+                $user->password = bcrypt($request->password);
+            }
+        }
+        $user->role = $request->role;
+        $user->update();
+
+        return redirect('/user')->with('success', 'You updated a User. '. $request->name .' I am so impressed!');
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return back()->with('warning', 'A User has been removed');
     }
 }

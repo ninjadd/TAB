@@ -16,7 +16,7 @@
                         <h3 class="panel-title pull-left">
                             Users
                         </h3>
-                        <a href="/user/create" class="btn btn-info btn-xs pull-right">New User</a>
+                        <a href="/user/create" class="btn btn-info btn-sm pull-right">New User</a>
                     </div>
 
                     <div class="panel-body">
@@ -47,7 +47,20 @@
                                         {{ $user->created_at->toDayDateTimeString() }}
                                     </td>
                                     <td>
+                                        <div class="hidden">{{ $user->id }}</div>
+                                        <form action="/user/{{ $user->id }}" method="POST">
+                                            <div class="btn-group">
+                                                <a href="/user/{{ $user->id }}/edit" class="btn btn-success btn-xs"  data-toggle="tooltip" title="Edit User">
+                                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                </a>
 
+                                                <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete User">
+                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                </button>
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
