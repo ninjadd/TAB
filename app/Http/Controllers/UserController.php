@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('user.admin.show', compact('user'));
     }
 
     /**
@@ -126,6 +126,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return back()->with('warning', 'A User has been removed');
+        return redirect(route('user.index'))->with('warning', 'A User has been removed');
     }
 }

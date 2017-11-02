@@ -50,6 +50,9 @@
                                         <div class="hidden">{{ $user->id }}</div>
                                         <form action="/user/{{ $user->id }}" method="POST">
                                             <div class="btn-group">
+                                                <a href="/user/{{ $user->id }}" class="btn btn-default btn-xs"  data-toggle="tooltip" title="View User">
+                                                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                </a>
                                                 <a href="/user/{{ $user->id }}/edit" class="btn btn-success btn-xs"  data-toggle="tooltip" title="Edit User">
                                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                                 </a>
