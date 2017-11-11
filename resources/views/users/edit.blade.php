@@ -15,7 +15,7 @@
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/user/{{ $user->id }}" method="POST" autocomplete="off">
+                        <form class="form-horizontal" action="/users/{{ $user->id }}" method="POST" autocomplete="off">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <fieldset>
@@ -41,17 +41,6 @@
                                     <label for="inputPassword" class="col-lg-2 control-label">Confirmation</label>
                                     <div class="col-lg-10">
                                         <input type="password" name="password_confirmation" class="form-control" id="inputPassword" placeholder="Update Password Confirmation">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputRole" class="col-lg-2 control-label">Role</label>
-                                    <div class="col-lg-10">
-                                        <select class="form-control" name="role" id="inputRole">
-                                            <option>Select Role</option>
-                                            <option {!! ($user->role == 'admin') ? 'selected="selected"' : null !!} value="admin">Administrator</option>
-                                            <option {!! ($user->role == 'owner') ? 'selected="selected"' : null !!} value="owner">Account Admin</option>
-                                            <option {!! ($user->role == 'staff') ? 'selected="selected"' : null !!} value="staff">Account User</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">

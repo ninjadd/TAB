@@ -27,8 +27,8 @@
                                 {{ $user->created_at->toDayDateTimeString() }}
                             </li>
                         </ul>
-                        <form action="/user/{{ $user->id }}" method="POST">
-                            <a href="/user/{{ $user->id }}/edit" class="btn btn-success">Edit User</a>
+                        <form action="/users/{{ $user->id }}" method="POST">
+                            <a href="/users/{{ $user->id }}/edit" class="btn btn-success">Edit User</a>
 
                             <button type="submit" class="btn btn-danger">Delete User</button>
                             {{ method_field('DELETE') }}

@@ -16,7 +16,7 @@
                         <h3 class="panel-title pull-left">
                             Users
                         </h3>
-                        <a href="/user/create" class="btn btn-info btn-sm pull-right">New User</a>
+                        <a href="/users/create" class="btn btn-info btn-sm pull-right">New User</a>
                     </div>
 
                     <div class="panel-body">
@@ -26,7 +26,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Role</th>
                                 <th>Member Since</th>
                                 <th></th>
                             </tr>
@@ -41,19 +40,16 @@
                                         {{ $user->email }}
                                     </td>
                                     <td>
-                                        {{ ucfirst($user->role) }}
-                                    </td>
-                                    <td>
                                         {{ $user->created_at->toDayDateTimeString() }}
                                     </td>
                                     <td>
                                         <div class="hidden">{{ $user->id }}</div>
-                                        <form action="/user/{{ $user->id }}" method="POST">
+                                        <form action="/users/{{ $user->id }}" method="POST">
                                             <div class="btn-group">
-                                                <a href="/user/{{ $user->id }}" class="btn btn-default btn-xs"  data-toggle="tooltip" title="View User">
+                                                <a href="/users/{{ $user->id }}" class="btn btn-default btn-xs"  data-toggle="tooltip" title="View User">
                                                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                                 </a>
-                                                <a href="/user/{{ $user->id }}/edit" class="btn btn-success btn-xs"  data-toggle="tooltip" title="Edit User">
+                                                <a href="/users/{{ $user->id }}/edit" class="btn btn-success btn-xs"  data-toggle="tooltip" title="Edit User">
                                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                                 </a>
 

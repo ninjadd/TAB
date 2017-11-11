@@ -15,7 +15,7 @@
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/user" method="POST" autocomplete="off">
+                        <form class="form-horizontal" action="/users" method="POST" autocomplete="off">
                             {{ csrf_field() }}
                             <fieldset>
                                 <div class="form-group">
@@ -40,17 +40,6 @@
                                     <label for="inputPassword" class="col-lg-2 control-label">Confirmation</label>
                                     <div class="col-lg-10">
                                         <input type="password" required="required" name="password_confirmation" class="form-control" id="inputPassword" placeholder="Password Confirmation">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputRole" class="col-lg-2 control-label">Role</label>
-                                    <div class="col-lg-10">
-                                        <select class="form-control" required="required" name="role" id="inputRole">
-                                            <option>Select Role</option>
-                                            <option {!! (old('role') == 'admin') ? 'selected="selected"' : null !!} value="admin">Administrator</option>
-                                            <option {!! (old('role') == 'owner') ? 'selected="selected"' : null !!} value="owner">Account Admin</option>
-                                            <option {!! (old('role') == 'staff') ? 'selected="selected"' : null !!} value="staff">Account User</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">

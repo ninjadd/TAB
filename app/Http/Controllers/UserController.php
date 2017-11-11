@@ -22,11 +22,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role = 'admin') {
-            $users = User::all();
+        $users = User::all();
 
-            return view('user.admin.index', compact('users'));
-        }
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -36,9 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->role == 'admin') {
-            return view('user.admin.create');
-        }
+
+        return view('users.create');
     }
 
     /**
@@ -59,10 +56,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role = $request->role;
         $user->save();
 
-        return redirect('/user')->with('success', 'You created a new User. '. $request->name .' Congrats!');
+        return redirect('/users')->with('success', 'You created a new User. '. $request->name .' Congrats!');
     }
 
     /**
@@ -73,7 +69,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.admin.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -84,9 +80,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if (auth()->user()->role == 'admin') {
-            return view('user.admin.edit', compact('user'));
-        }
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -110,10 +104,9 @@ class UserController extends Controller
                 $user->password = bcrypt($request->password);
             }
         }
-        $user->role = $request->role;
         $user->update();
 
-        return redirect('/user')->with('success', 'You updated a User. '. $request->name .' I am so impressed!');
+        return redirect('/users')->with('success', 'You updated a User. '. $request->name .' I am so impressed!');
     }
 
 
@@ -126,6 +119,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect(route('user.index'))->with('warning', 'A User has been removed');
+        return redirect(route('users.index'))->with('warning', 'A User has been removed');
     }
 }
