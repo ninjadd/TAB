@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
+use App\UserOrganization;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -22,7 +23,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        //
+        return null;
     }
 
     /**
@@ -49,10 +50,14 @@ class OrganizationController extends Controller
         ]);
 
         $organization = new Organization();
-        $organization->user_id = auth()->id();
         $organization->name = $request->name;
         $organization->description = $request->description;
         $organization->save();
+
+        $userOrganization = new UserOrganization();
+        $userOrganization->user_id = auth()->id();
+        $userOrganization->organization_id = $organization->id;
+        $userOrganization->save();
 
         return redirect('home')->with('success', 'You added Organizational information. Yay!');
     }
@@ -65,7 +70,7 @@ class OrganizationController extends Controller
      */
     public function show(Organization $organization)
     {
-        //
+        return null;
     }
 
     /**
@@ -76,7 +81,7 @@ class OrganizationController extends Controller
      */
     public function edit(Organization $organization)
     {
-        //
+        return view('organizations.edit', compact('organization'));
     }
 
     /**
@@ -88,7 +93,16 @@ class OrganizationController extends Controller
      */
     public function update(Request $request, Organization $organization)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'description' => 'required|min:140'
+        ]);
+
+        $organization->name = $request->name;
+        $organization->description = $request->description;
+        $organization->update();
+
+        return redirect('home')->with('success', 'You updated your Organization. Great job!');
     }
 
     /**
@@ -99,6 +113,6 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
-        //
+        return null;
     }
 }

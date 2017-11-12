@@ -17,16 +17,15 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
-                            @if(empty(auth()->user()->organization))
+                            @if(empty(count(auth()->user()->organization)))
                                 <p class="lead">Organization Information</p>
                                 <p>You need to set up your organization</p>
                                 <p><a href="/organizations/create" class="btn btn-info btn-sm">Add</a></p>
-
                             @else
                                 <p class="lead">Organization Information</p>
-                                <p><em>Name:</em> {{ auth()->user()->organization->name }}</p>
-                                <p><em>Description:</em> {{ auth()->user()->organization->description }}</p>
-                                <p><a href="/organizations/edit" class="btn btn-success btn-sm">Edit</a></p>
+                                <p><em>Name:</em> {{ auth()->user()->organization[0]->name }}</p>
+                                <p><em>Description:</em><br>{!! nl2br(auth()->user()->organization[0]->description) !!}</p>
+                                <p><a href="/organizations/{{ auth()->user()->organization[0]->id }}/edit" class="btn btn-success btn-sm">Edit</a></p>
                             @endif
                         </div>
                         <div class="col-md-4">

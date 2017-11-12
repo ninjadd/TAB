@@ -29,3 +29,7 @@ Route::resource('users', 'UserController');
 Route::get('organizations/create', 'OrganizationController@create');
 
 Route::post('organizations', 'OrganizationController@store');
+
+Route::get('organizations/{organization}/edit', 'OrganizationController@edit');
+
+Route::put('organizations/{organization}', 'OrganizationController@update');

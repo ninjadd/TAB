@@ -43,11 +43,8 @@ class User extends Authenticatable
         return $this->hasOne('App\UserRole');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function organization()
     {
-        return $this->hasOne('App\Organization');
+        return $this->hasManyThrough('App\Organization', 'App\UserOrganization', 'user_id', 'id');
     }
 }

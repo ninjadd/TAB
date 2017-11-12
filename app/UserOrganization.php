@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Organization extends Model
+class UserOrganization extends Model
 {
     use SoftDeletes;
 
@@ -22,7 +22,7 @@ class Organization extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'description'
+        'user_id', 'organization_id'
     ];
 
     /**
@@ -31,4 +31,9 @@ class Organization extends Model
      * @var array
      */
     protected $hidden = [];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
