@@ -19,7 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/* Admin User Routes */
+/* User Routes */
 
 Route::resource('users', 'UserController');
 
+
+/* Organization Routes */
+
+Route::get('organizations/create', 'OrganizationController@create');
+
+Route::post('organizations', 'OrganizationController@store');

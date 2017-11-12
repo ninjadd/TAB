@@ -32,7 +32,7 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        //
+        return view('organizations.create');
     }
 
     /**
@@ -43,7 +43,18 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'description' => 'required|min:140'
+        ]);
+
+        $organization = new Organization();
+        $organization->user_id = auth()->id();
+        $organization->name = $request->name;
+        $organization->description = $request->description;
+        $organization->save();
+
+        return redirect('home')->with('success', 'You added Organizational information. Yay!');
     }
 
     /**
