@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    T.A.B.
+                    TheAgileBusiness
                 </div>
 
                 <div class="links">

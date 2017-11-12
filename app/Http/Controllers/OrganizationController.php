@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\UserRole;
+use App\Organization;
 use Illuminate\Http\Request;
 
-class UserRoleController extends Controller
+class OrganizationController extends Controller
 {
     /**
-     * UserRoleController constructor.
+     * OrganizationController constructor.
      */
     public function __construct()
     {
@@ -49,10 +49,10 @@ class UserRoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserRole  $userRole
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function show(UserRole $userRole)
+    public function show(Organization $organization)
     {
         //
     }
@@ -60,10 +60,10 @@ class UserRoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserRole  $userRole
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserRole $userRole)
+    public function edit(Organization $organization)
     {
         //
     }
@@ -72,10 +72,10 @@ class UserRoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserRole  $userRole
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserRole $userRole)
+    public function update(Request $request, Organization $organization)
     {
         //
     }
@@ -83,10 +83,10 @@ class UserRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserRole  $userRole
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserRole $userRole)
+    public function destroy(Organization $organization)
     {
         //
     }

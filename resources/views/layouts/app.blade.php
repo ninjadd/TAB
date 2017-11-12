@@ -60,8 +60,6 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/home">Dashboard</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/users">Users</a></li>
-                                    <li class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
