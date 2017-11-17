@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Organization;
+use App\UserOrganization;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $userOrganization = UserOrganization::where('user_id', auth()->id())->first();
+//        $organization = Organization::where('id', $userOrganization->organization_id)->first();
+
+        return view('home.index', compact('organization'));
     }
 }
