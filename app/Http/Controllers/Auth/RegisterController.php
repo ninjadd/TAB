@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\UserRole;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,13 +67,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
-        $userRole = new UserRole();
-        $userRole->user_id = $user->id;
-        $userRole->name = 'CEO';
-        $userRole->description = 'Chief Executive Officer';
-        $userRole->weight = 2;
-        $userRole->save();
 
         return $user;
     }
