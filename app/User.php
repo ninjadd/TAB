@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'email', 'password'
     ];
 
     /**
@@ -37,14 +37,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function role() {
-        return $this->hasOne('App\UserRole');
-    }
-
-    public function organization()
+    public function roles()
     {
-        return $this->hasManyThrough('App\Organization', 'App\UserOrganization', 'user_id', 'id');
+        return $this->belongsToMany('App\Role')->withTimestamps();
     }
 }

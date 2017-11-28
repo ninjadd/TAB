@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use Faker\Factory as Faker;
+use App\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,16 +13,29 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['name' => 'Daniel Dickson', 'email' => 'ninjadd@gmail.com', 'password' => bcrypt('6891ninja')]);
+        $role_employee = Role::where('name', 'employee')->first();
+        $role_manager  = Role::where('name', 'manager')->first();
+        $role_admin = Role::where('name', 'admin')->first();
 
-        $faker = Faker::create();
+        $admin = new User();
+        $admin->name = 'Admin Name';
+        $admin->email = 'admin@example.com';
+        $admin->password = bcrypt('secret');
+        $admin->save();
+        $admin->roles()->attach($role_admin);
 
-        foreach (range(1, 49) as $item) {
-            $user = new User();
-            $user->name = $faker->name();
-            $user->email = $faker->email;
-            $user->password = bcrypt('secret');
-            $user->save();
-        }
+        $employee = new User();
+        $employee->name = 'Employee Name';
+        $employee->email = 'employee@example.com';
+        $employee->password = bcrypt('secret');
+        $employee->save();
+        $employee->roles()->attach($role_employee);
+
+        $manager = new User();
+        $manager->name = 'Manager Name';
+        $manager->email = 'manager@example.com';
+        $manager->password = bcrypt('secret');
+        $manager->save();
+        $manager->roles()->attach($role_manager);
     }
 }
