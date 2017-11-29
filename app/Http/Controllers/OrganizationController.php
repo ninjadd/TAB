@@ -22,7 +22,7 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         return view('organizations.index');
     }
@@ -34,7 +34,7 @@ class OrganizationController extends Controller
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         return view('organizations.create');
     }
@@ -47,7 +47,7 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         $this->validate($request, [
             'name' => 'required|min:3',

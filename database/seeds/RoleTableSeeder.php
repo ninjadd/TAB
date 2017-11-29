@@ -13,23 +13,28 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $role = new Role();
-        $role->name = 'admin';
+        $role->name = 'master';
         $role->description = 'A TAB User';
         $role->save();
 
         $role = new Role();
+        $role->name = 'admin';
+        $role->description = 'The primary on the account can add, edit and delete Users and all parts of the Organization';
+        $role->save();
+
+        $role = new Role();
         $role->name = 'manager';
-        $role->description = 'A Manager User';
+        $role->description = 'User who can add, edit and delete Users in his portion of the Org';
         $role->save();
 
         $role = new Role();
         $role->name = 'employee';
-        $role->description = 'A Employee User';
+        $role->description = 'User can update own user profile and view all parts of the Org and send communications throughout the Org ';
         $role->save();
 
         $role = new Role();
         $role->name = 'staff';
-        $role->description = 'A Staff User';
+        $role->description = 'Can view all parts and send communications throughout the Org';
         $role->save();
     }
 }

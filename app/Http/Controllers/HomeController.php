@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager', 'employee', 'staff']);
 
         return view('home.index');
     }

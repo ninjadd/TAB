@@ -34,11 +34,13 @@ class OrganizationUserController extends Controller
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         $user = auth()->user();
 
-        return view('organizations.users.create', compact( 'user'));
+        $roles = Role::where('id', '!=', 1)->orderBy('id')->get();
+
+        return view('organizations.users.create', compact( 'user', 'roles'));
     }
 
     /**
@@ -49,13 +51,16 @@ class OrganizationUserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
+
         if ($request->submit == 'Add') {
             $this->validate($request, [
                 'name' => 'required|string|max:255|min:3',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6|confirmed',
                 'title' => 'required|string|min:3',
-                'description' => 'required|string|max:280'
+                'description' => 'required|string|max:280',
+                'role_id' => 'required|integer'
             ]);
 
             $user = User::create([
@@ -65,7 +70,7 @@ class OrganizationUserController extends Controller
                 'title' => $request->title,
                 'description' => $request->description
             ]);
-            $user->roles()->attach(Role::where('id', 2)->first());
+            $user->roles()->attach(Role::where('id', $request->role_id)->first());
             $organization = Organization::find(auth()->user()->organizations->first()->id);
             $organization->users()->attach($user);
 

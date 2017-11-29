@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         return view('users.edit', compact('user'));
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->user()->authorizeRoles(['admin', 'manager']);
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         $this->validate($request, [
             'name' => 'required|string',

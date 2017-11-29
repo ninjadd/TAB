@@ -56,6 +56,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="selectRole" class="col-lg-2 control-label">Role</label>
+                                    <div class="col-lg-10">
+                                        <select required="required" name="role_id" class="form-control" id="selectRole">
+                                            <option>Select</option>
+                                            @foreach($roles as $role)
+                                                <option value="{{ $role->id }}">
+                                                    {{ ucfirst($role->name) }} &mdash; {{ $role->description }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
                                         <input type="submit" name="submit" value="Add" class="btn btn-info">
                                         <input type="submit" name="submit" value="Next" class="btn btn-info">
@@ -63,6 +76,19 @@
                                 </div>
                             </fieldset>
                         </form>
+
+                        @if(count(auth()->user()->organizations->first()->users) > 0)
+                            <ul class="list-group">
+                                @foreach(auth()->user()->organizations->first()->users as $user)
+                                    <li class="list-group-item {{ ($loop->first) ? 'active' : null }}">
+                                        <span class="badge">{{ $user->title }}</span>
+                                        {{ $user->name }}
+                                        <br>
+                                        {{ $user->description }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
 
                     </div>
                 </div>
