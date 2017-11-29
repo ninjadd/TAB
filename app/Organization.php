@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Organization extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = [];
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +22,7 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'name',
         'description'
     ];
@@ -30,9 +34,6 @@ class Role extends Model
      */
     protected $hidden = [];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function users()
     {
         return $this->belongsToMany('App\User')->withTimestamps();

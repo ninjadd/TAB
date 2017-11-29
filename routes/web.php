@@ -20,5 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /* User Routes */
-
 Route::resource('users', 'UserController');
+
+/* Organizations Routes */
+Route::get('organizations/create', 'OrganizationController@create');
+
+Route::post('organizations', 'OrganizationController@store');
+
+/* OrganizationUsers Routes */
+Route::get('organizations/users/create', 'OrganizationUserController@create')->name('organizations.users.create');
+
+Route::post('organizations/users/', 'OrganizationUserController@store');

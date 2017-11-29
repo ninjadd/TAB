@@ -24,7 +24,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name',
+        'email',
+        'password',
+        'title',
+        'description'
     ];
 
     /**
@@ -42,5 +46,41 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany('App\Role')->withTimestamps();
+    }
+
+    /**
+     * @param $roles
+     * @return bool
+     */
+    public function authorizeRoles($roles)
+    {
+        if (is_array($roles)) {
+            return $this->hasAnyRole($roles) || redirect(route('logout'));
+        }
+
+        return $this->hasRole($roles) || redirect(route('logout'));
+    }
+
+    /**
+     * @param $roles
+     * @return bool
+     */
+    public function hasAnyRole($roles)
+    {
+        return null !== $this->roles()->whereIn('name', $roles)->first();
+    }
+
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return null !== $this->roles()->where('name', $role)->first();
+    }
+
+    public function organizations()
+    {
+        return $this->belongsToMany('App\Organization')->withTimestamps();
     }
 }

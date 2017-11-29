@@ -78,8 +78,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
+        $request->user()->authorizeRoles(['admin', 'manager']);
+
         return view('users.edit', compact('user'));
     }
 
@@ -92,21 +94,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->user()->authorizeRoles(['admin', 'manager']);
+
         $this->validate($request, [
             'name' => 'required|string',
-            'email' => 'required|string|email'
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|max:280'
         ]);
 
         $user->name = $request->name;
-        $user->email = $request->email;
-        if (!empty($request->password)) {
-            if ($request->password == $request->password_confirmation) {
-                $user->password = bcrypt($request->password);
-            }
-        }
+        $user->title = $request->title;
+        $user->description = $request->description;
         $user->update();
 
-        return redirect('/users')->with('success', 'You updated a User. '. $request->name .' I am so impressed!');
+        return redirect(route('organizations.users.create'));
     }
 
 

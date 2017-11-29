@@ -17,8 +17,14 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <p class="lead">You Dashboard</p>
-                            <p>This is where the account form will be.</p>
+                            <p class="lead">Your Dashboard</p>
+                            <p>Thank you for creating an account with TAB</p>
+                            <p>
+                                Let's get started with building your Company
+                            </p>
+                            <p>
+                                <a href="/organizations/create" class="btn btn-sm btn-info">Start</a>
+                            </p>
                         </div>
                     </div>
                 </div>
