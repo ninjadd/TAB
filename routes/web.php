@@ -31,3 +31,8 @@ Route::post('organizations', 'OrganizationController@store');
 Route::get('organizations/users/create', 'OrganizationUserController@create')->name('organizations.users.create');
 
 Route::post('organizations/users/', 'OrganizationUserController@store');
+
+/* Divisions Routes */
+Route::get('divisions/create', 'DivisionController@create');
+
+Route::post('divisions', 'DivisionController@store');

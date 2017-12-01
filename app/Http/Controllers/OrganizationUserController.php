@@ -53,31 +53,27 @@ class OrganizationUserController extends Controller
     {
         $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
-        if ($request->submit == 'Add') {
-            $this->validate($request, [
-                'name' => 'required|string|max:255|min:3',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-                'title' => 'required|string|min:3',
-                'description' => 'required|string|max:280',
-                'role_id' => 'required|integer'
-            ]);
+        $this->validate($request, [
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|max:280',
+            'role_id' => 'required|integer'
+        ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'title' => $request->title,
-                'description' => $request->description
-            ]);
-            $user->roles()->attach(Role::where('id', $request->role_id)->first());
-            $organization = Organization::find(auth()->user()->organizations->first()->id);
-            $organization->users()->attach($user);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
+        $user->roles()->attach(Role::where('id', $request->role_id)->first());
+        $organization = Organization::find(auth()->user()->organizations->first()->id);
+        $organization->users()->attach($user);
 
-            return back()->with('success', 'You added a new staff member or move on to the next step.');
-        }
-
-        return redirect('home');
+        return back()->with('success', 'You added a new staff member or move on to the next step.');
     }
 
     /**

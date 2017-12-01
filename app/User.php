@@ -79,8 +79,16 @@ class User extends Authenticatable
         return null !== $this->roles()->where('name', $role)->first();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function organizations()
     {
         return $this->belongsToMany('App\Organization')->withTimestamps();
+    }
+
+    public function divisions()
+    {
+        return $this->hasMany('App\Division');
     }
 }

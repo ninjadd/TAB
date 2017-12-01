@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Organization extends Model
+class Division extends Model
 {
     use SoftDeletes;
 
@@ -23,7 +23,9 @@ class Organization extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
+        'organization_id',
+        'assigned_id',
+        'title',
         'description'
     ];
 
@@ -35,18 +37,23 @@ class Organization extends Model
     protected $hidden = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function organization()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->belongsTo('App\Organization');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function divisions()
+    public function user()
     {
-        return $this->hasMany('App\Division');
+        return $this->belongsTo('App\User');
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsTo('App\User', 'assigned_id', 'id');
     }
 }
