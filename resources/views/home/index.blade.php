@@ -16,16 +16,26 @@
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <p class="lead">Your Dashboard</p>
-                            <p>Thank you for creating an account with TAB</p>
-                            <p>
-                                Let's get started with building your Company
-                            </p>
-                            <p>
-                                <a href="/organizations/create" class="btn btn-sm btn-info">Start</a>
-                            </p>
-                        </div>
+                        @if(empty($organization))
+                            <div class="col-md-4">
+                                <p class="lead">Your Dashboard</p>
+                                <p>Thank you for creating an account with TAB</p>
+                                <p>
+                                    Let's get started with building your Company
+                                </p>
+                                <p>
+                                    <a href="/organizations/create" class="btn btn-sm btn-info">Start</a>
+                                </p>
+                            </div>
+                        @else
+                            @switch($user->roles->first()->name)
+                                @case('admin')
+                                        @include('home.admin.index')
+                                    @break
+                                @default
+
+                            @endswitch
+                        @endif
                     </div>
                 </div>
             </div>

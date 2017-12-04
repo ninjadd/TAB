@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Organization;
-use App\UserOrganization;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +24,9 @@ class HomeController extends Controller
     {
         $request->user()->authorizeRoles(['master', 'admin', 'manager', 'employee', 'staff']);
 
-        return view('home.index');
+        $user = auth()->user();
+        $organization = $user->organizations->first();
+
+        return view('home.index', compact('user', 'organization'));
     }
 }

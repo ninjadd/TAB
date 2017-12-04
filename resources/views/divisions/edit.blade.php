@@ -7,17 +7,18 @@
                 @include('shared.errors')
                 @include('shared.session')
 
-                <div class="panel panel-info">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Add divisions to {{ $organization->name }}
+                            Edit {{ $division->title }} form {{ $organization->name }}
                         </h3>
                     </div>
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/divisions" method="POST" autocomplete="off">
+                        <form class="form-horizontal" action="/divisions/{{ $division->id }}" method="POST" autocomplete="off">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
                             <fieldset>
                                 <div class="form-group">
                                     <label for="selectUser" class="col-lg-2 control-label">Assigned Staff</label>
@@ -25,7 +26,7 @@
                                         <select required="required" name="assigned_id" class="form-control" id="selectUser">
                                             <option>Select</option>
                                             @foreach($users as $user)
-                                                <option value="{{ $user->id }}">
+                                                <option {!! ($user->id == $division->assigned_id) ? 'selected="selected"' : null !!} value="{{ $user->id }}">
                                                     {{ $user->name }} &mdash; {{ $user->title }}
                                                 </option>
                                             @endforeach
@@ -35,38 +36,23 @@
                                 <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="title" required="required" value="{{ old('title') }}" class="form-control" id="inputTitle" placeholder="Human Resources, Operations etc.">
+                                        <input type="text" name="title" required="required" value="{{ $division->title }}" class="form-control" id="inputTitle" placeholder="Human Resources, Operations etc.">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="textAreaDescription" class="col-lg-2 control-label">Description</label>
                                     <div class="col-lg-10">
-                                        <textarea required="required" name="description" class="form-control" id="textAreaDescription" placeholder="">{{ old('description') }}</textarea>
+                                        <textarea required="required" name="description" class="form-control" id="textAreaDescription" placeholder="">{{ $division->description }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <input type="submit" name="submit" value="Add" class="btn btn-primary">
-                                        <a href="/home" class="btn btn-info">Next</a>
+                                        <a href="/home" class="btn btn-primary">Dashboard</a>
+                                        <input type="submit" name="submit" value="Update" class="btn btn-success">
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
-
-                        @if($divisions->count() > 0)
-                            <ul class="list-group">
-                                @foreach($divisions as $division)
-                                    <li class="list-group-item {{ ($loop->first) ? 'active' : null }}">
-                                        <span class="badge">{{ $division->assignedTo->title }}</span>
-                                        {{ $division->title }}
-                                        <br>
-                                        {{ $division->assignedTo->name }}
-                                        <br>
-                                        {{ $division->description }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
 
                     </div>
                 </div>

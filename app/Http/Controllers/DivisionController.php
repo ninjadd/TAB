@@ -75,18 +75,24 @@ class DivisionController extends Controller
      */
     public function show(Division $division)
     {
-        //
+        return null;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Division  $division
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Division $division)
+    public function edit(Request $request, Division $division)
     {
-        //
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
+
+        $organization = auth()->user()->organizations()->first();
+        $users = $organization->users;
+
+        return view('divisions.edit', compact('division', 'organization', 'users'));
     }
 
     /**
@@ -98,17 +104,33 @@ class DivisionController extends Controller
      */
     public function update(Request $request, Division $division)
     {
-        //
+        $request->validate([
+            'assigned_id' => 'required|integer',
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|max:280'
+        ]);
+
+        $division->user_id = auth()->id();
+        $division->organization_id = auth()->user()->organizations->first()->id;
+        $division->assigned_id = $request->assigned_id;
+        $division->title = $request->title;
+        $division->description = $request->description;
+        $division->save();
+
+        return back()->with('success', 'You have updated this division.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Division  $division
-     * @return \Illuminate\Http\Response
+     * @param Division $division
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Division $division)
     {
-        //
+        $division->delete();
+
+        return back()->with('warning', 'Well that\'s gone now.');
     }
 }

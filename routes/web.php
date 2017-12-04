@@ -36,3 +36,14 @@ Route::post('organizations/users/', 'OrganizationUserController@store');
 Route::get('divisions/create', 'DivisionController@create');
 
 Route::post('divisions', 'DivisionController@store');
+
+Route::get('divisions/{division}/edit', 'DivisionController@edit');
+
+Route::put('divisions/{division}', 'DivisionController@update');
+
+Route::delete('divisions/{division}', 'DivisionController@destroy');
+
+/* Departments Routes */
+Route::get('divisions/{division}/departments/create', 'DepartmentController@create');
+
+Route::post('divisions/{division}/departments', 'DepartmentController@store');

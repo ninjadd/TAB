@@ -61,7 +61,7 @@ class OrganizationController extends Controller
         $organization->save();
         $organization->users()->attach(auth()->id());
 
-        return redirect(route('users.edit', ['user_id' => $organization->user_id]));
+        return redirect(route('users.create'));
     }
 
     /**

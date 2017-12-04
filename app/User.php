@@ -87,8 +87,27 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Organization')->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function divisions()
     {
         return $this->hasMany('App\Division');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function departments()
+    {
+        return $this->hasMany('App\Department');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sections()
+    {
+        return $this->hasMany('App\Section');
     }
 }

@@ -10,13 +10,13 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Add divisions to {{ $organization->name }}
+                            Add some departments to {{ $division->title }}
                         </h3>
                     </div>
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/divisions" method="POST" autocomplete="off">
+                        <form class="form-horizontal" action="/divisions/{{ $division->id }}/departments" method="POST" autocomplete="off">
                             {{ csrf_field() }}
                             <fieldset>
                                 <div class="form-group">
@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="title" required="required" value="{{ old('title') }}" class="form-control" id="inputTitle" placeholder="Human Resources, Operations etc.">
+                                        <input type="text" name="title" required="required" value="{{ old('title') }}" class="form-control" id="inputTitle" placeholder="Finance etc.">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -47,22 +47,22 @@
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
                                         <input type="submit" name="submit" value="Add" class="btn btn-primary">
-                                        <a href="/home" class="btn btn-info">Next</a>
+                                        <a href="/home" class="btn btn-info">Dashboard</a>
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
 
-                        @if($divisions->count() > 0)
+                        @if($departments->count() > 0)
                             <ul class="list-group">
-                                @foreach($divisions as $division)
+                                @foreach($departments as $department)
                                     <li class="list-group-item {{ ($loop->first) ? 'active' : null }}">
-                                        <span class="badge">{{ $division->assignedTo->title }}</span>
-                                        {{ $division->title }}
+                                        <span class="badge">{{ $department->assignedTo->title }}</span>
+                                        {{ $department->title }}
                                         <br>
-                                        {{ $division->assignedTo->name }}
+                                        {{ $department->assignedTo->name }}
                                         <br>
-                                        {{ $division->description }}
+                                        {{ $department->description }}
                                     </li>
                                 @endforeach
                             </ul>

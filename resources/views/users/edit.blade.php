@@ -6,10 +6,10 @@
             <div class="col-md-12">
                 @include('shared.errors')
 
-                <div class="panel panel-info">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Add your role in {{ $user->organizations->first()->name }}
+                            Update {{ $user->organizations->first()->name }}
                         </h3>
                     </div>
 
@@ -29,20 +29,21 @@
                                 <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="title" required="required" value="{{ old('title') }}" class="form-control" id="inputTitle" placeholder="CEO, Founder etc.">
+                                        <input type="text" name="title" required="required" value="{{ (empty($user)) ? old('title') : $user->title  }}" class="form-control" id="inputTitle" placeholder="CEO, Founder etc.">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="textAreaDescription" class="col-lg-2 control-label">Description</label>
                                     <div class="col-lg-10">
-                                        <textarea required="required" name="description" class="form-control" id="textAreaDescription" placeholder="Um? What would you say you do here?">{{ old('description') }}</textarea>
+                                        <textarea required="required" name="description" class="form-control" id="textAreaDescription" placeholder="Um? What would you say you do here?">{{ (empty($user)) ? old('description') : $user->description  }}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <button type="submit" class="btn btn-info">Next</button>
+                                        <a href="/home" class="btn btn-primary">Dashboard</a>
+                                        <button type="submit" class="btn btn-success">Save/Next</button>
                                     </div>
                                 </div>
                             </fieldset>

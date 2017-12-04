@@ -30,10 +30,12 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
         return view('users.create');
     }
@@ -82,7 +84,13 @@ class UserController extends Controller
     {
         $request->user()->authorizeRoles(['master', 'admin', 'manager']);
 
-        return view('users.edit', compact('user'));
+        if ((auth()->user()->id === $user->id) ||
+            (auth()->user()->roles->first()->name == 'admin') ||
+            (auth()->user()->roles->first()->name == 'master')) {
+            return view('users.edit', compact('user'));
+        }
+
+        return redirect(route('logout'));
     }
 
     /**
