@@ -44,6 +44,12 @@ Route::put('divisions/{division}', 'DivisionController@update');
 Route::delete('divisions/{division}', 'DivisionController@destroy');
 
 /* Departments Routes */
-Route::get('divisions/{division}/departments/create', 'DepartmentController@create');
+Route::get('divisions/{division}/departments/create', 'DepartmentController@create')->name('divisions.departments.create');
 
 Route::post('divisions/{division}/departments', 'DepartmentController@store');
+
+Route::get('departments/{department}/edit', 'DepartmentController@edit');
+
+Route::put('departments/{department}', 'DepartmentController@update');
+
+Route::delete('departments/{department}', 'DepartmentController@destroy');

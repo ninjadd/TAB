@@ -63,6 +63,18 @@
                                         {{ $department->assignedTo->name }}
                                         <br>
                                         {{ $department->description }}
+                                        <form class="pull-right" action="/departments/{{ $department->id }}" method="POST">
+                                            <a class="btn btn-xs btn-success" href="/departments/{{ $department->id }}/edit">Update</a>
+                                            <a href="#" class="btn btn-xs {{ ($loop->first  ) ? 'btn-default' : 'btn-primary' }}">
+                                                Manage
+                                                <span class="badge">0</span>
+                                            </a>
+                                            <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
+                                                Delete
+                                            </button>
+                                            {{ method_field('DELETE') }}
+                                            {{ csrf_field() }}
+                                        </form>
                                     </li>
                                 @endforeach
                             </ul>

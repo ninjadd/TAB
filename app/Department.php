@@ -41,7 +41,7 @@ class Department extends Model
      */
     public function division()
     {
-        $this->belongsTo('App\Division');
+        return $this->belongsTo('App\Division');
     }
 
     /**

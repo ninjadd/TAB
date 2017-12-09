@@ -36,7 +36,7 @@ class DepartmentController extends Controller
 
         $organization = auth()->user()->organizations()->first();
         $users = $organization->users;
-        $departments = Department::where('division_id', $division->id);
+        $departments = Department::where('division_id', $division->id)->get();
 
         return view('departments.create', compact('division', 'users', 'departments'));
     }
@@ -75,7 +75,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return null;
     }
 
     /**
@@ -84,9 +84,15 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit(Request $request, Department $department)
     {
-        //
+        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
+
+        $division = Division::find($department->division->id);
+        $organization = auth()->user()->organizations()->first();
+        $users = $organization->users;
+
+        return view('departments.edit', compact('division', 'department', 'users'));
     }
 
     /**
@@ -98,17 +104,31 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $request->validate([
+            'assigned_id' => 'required|integer',
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|max:280'
+        ]);
+
+        $department->user_id = auth()->id();
+        $department->assigned_id = $request->assigned_id;
+        $department->title = $request->title;
+        $department->description = $request->description;
+        $department->update();
+
+        return redirect(route('divisions.departments.create', $department->division_id))->with('success', 'You updated that part of your organization yeah!');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete();
+
+        return back()->with('warning', 'Another one bites the dust.');
     }
 }

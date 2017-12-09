@@ -87,7 +87,10 @@
                                 <p>{{ $division->description }}</p>
                                 <form action="/divisions/{{ $division->id }}" method="POST">
                                     <a class="btn btn-xs btn-success" href="/divisions/{{ $division->id }}/edit">Update</a>
-                                    <a href="/divisions/{{ $division->id }}/departments/create" class="btn btn-xs btn-primary">Manage</a>
+                                    <a href="/divisions/{{ $division->id }}/departments/create" class="btn btn-xs btn-primary">
+                                        Manage
+                                        <span class="badge">{{ $division->departments->count() }}</span>
+                                    </a>
                                     <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
                                         Delete
                                     </button>
