@@ -7,16 +7,16 @@
                 @include('shared.errors')
                 @include('shared.session')
 
-                <div class="panel panel-info">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Add some departments to {{ $division->title }}
+                            Add some teams or sections to {{ $department->title }}
                         </h3>
                     </div>
 
                     <div class="panel-body">
 
-                        <form class="form-horizontal" action="/divisions/{{ $division->id }}/departments" method="POST" autocomplete="off">
+                        <form class="form-horizontal" action="/departments/{{ $department->id }}/sections" method="POST" autocomplete="off">
                             {{ csrf_field() }}
                             <fieldset>
                                 <div class="form-group">
@@ -53,22 +53,18 @@
                             </fieldset>
                         </form>
 
-                        @if($departments->count() > 0)
+                        @if($sections->count() > 0)
                             <ul class="list-group">
-                                @foreach($departments as $department)
+                                @foreach($sections as $section)
                                     <li class="list-group-item {{ ($loop->first) ? 'active' : null }}">
-                                        <span class="badge">{{ $department->assignedTo->title }}</span>
-                                        {{ $department->title }}
+                                        <span class="badge">{{ $section->assignedTo->title }}</span>
+                                        {{ $section->title }}
                                         <br>
-                                        {{ $department->assignedTo->name }}
+                                        {{ $section->assignedTo->name }}
                                         <br>
-                                        {{ $department->description }}
-                                        <form class="pull-right" action="/departments/{{ $department->id }}" method="POST">
-                                            <a class="btn btn-xs btn-success" href="/departments/{{ $department->id }}/edit">Update</a>
-                                            <a href="/departments/{{ $department->id }}/sections/create" class="btn btn-xs {{ ($loop->first  ) ? 'btn-default' : 'btn-primary' }}">
-                                                Manage
-                                                <span class="badge">{{ $department->sections->count() }}</span>
-                                            </a>
+                                        {{ $section->description }}
+                                        <form class="pull-right" action="/sections/{{ $section->id }}" method="POST">
+                                            <a class="btn btn-xs btn-success" href="/sections/{{ $section->id }}/edit">Update</a>
                                             <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
                                                 Delete
                                             </button>

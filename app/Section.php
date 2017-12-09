@@ -37,11 +37,11 @@ class Section extends Model
     protected $hidden = [];
 
     /**
-     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function department()
     {
-        $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Department');
     }
 
     /**
@@ -52,6 +52,9 @@ class Section extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function assignedTo()
     {
         return $this->belongsTo('App\User', 'assigned_id', 'id');

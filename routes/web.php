@@ -53,3 +53,14 @@ Route::get('departments/{department}/edit', 'DepartmentController@edit');
 Route::put('departments/{department}', 'DepartmentController@update');
 
 Route::delete('departments/{department}', 'DepartmentController@destroy');
+
+/* Sections Routes */
+Route::get('departments/{department}/sections/create', 'SectionController@create')->name('departments.sections.create');
+
+Route::post('departments/{department}/sections', 'SectionController@store');
+
+Route::get('sections/{section}/edit', 'SectionController@edit');
+
+Route::put('sections/{section}', 'SectionController@update');
+
+Route::delete('sections/{section}', 'SectionController@destroy');
