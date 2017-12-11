@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Division;
+use App\Organization;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,7 +28,8 @@ class HomeController extends Controller
 
         $user = auth()->user();
         $organization = $user->organizations->first();
+        $divisions = Division::with(['departments', 'assignedTo'])->where('organization_id', $organization->id)->get();
 
-        return view('home.index', compact('user', 'organization'));
+        return view('home.index', compact('user', 'organization', 'divisions'));
     }
 }

@@ -36,7 +36,7 @@ class DepartmentController extends Controller
 
         $organization = auth()->user()->organizations()->first();
         $users = $organization->users;
-        $departments = Department::where('division_id', $division->id)->get();
+        $departments = Department::with(['sections', 'assignedTo'])->where('division_id', $division->id)->get();
 
         return view('departments.create', compact('division', 'users', 'departments'));
     }

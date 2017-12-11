@@ -110,4 +110,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Section');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function knowledgeBases()
+    {
+        return $this->hasMany('App\KnowledgeBase');
+    }
 }

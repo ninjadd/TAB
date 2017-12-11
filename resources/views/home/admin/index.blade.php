@@ -56,7 +56,7 @@
 
             <div class="panel-body" style="min-height: 220px; max-height: 220px;overflow-y: scroll;">
                 <ul class="list-group">
-                    @foreach($organization->divisions as $division)
+                    @foreach($divisions as $division)
                         <li class="list-group-item">
                             {{ $division->title }}
                         </li>
@@ -68,8 +68,8 @@
 </div>
 
 <div class="container-fluid">
-    @if(!empty($organization->divisions))
-        @foreach($organization->divisions as $division)
+    @if(!empty($divisions))
+        @foreach($divisions as $division)
             <div class="col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading clearfix">
@@ -91,7 +91,7 @@
                                         Manage
                                         <span class="badge">{{ $division->departments->count() }}</span>
                                     </a>
-                                    <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
+                                    <button type="submit" class="btn btn-danger btn-xs">
                                         Delete
                                     </button>
                                     {{ method_field('DELETE') }}

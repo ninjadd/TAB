@@ -60,6 +60,8 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/home">Dashboard</a></li>
                                     <li class="divider"></li>
+                                    <li><a href="/knowledge-bases">KnowledgeBase</a></li>
+                                    <li class="divider"></li>
                                     <li><a href="/users/{{ auth()->user()->id }}/edit">Your Settings</a></li>
                                     <li class="divider"></li>
                                     <li>
@@ -84,4 +86,5 @@
         @yield('content')
     </div>
 </body>
+@yield('foot')
 </html>

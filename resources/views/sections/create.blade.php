@@ -65,7 +65,7 @@
                                         {{ $section->description }}
                                         <form class="pull-right" action="/sections/{{ $section->id }}" method="POST">
                                             <a class="btn btn-xs btn-success" href="/sections/{{ $section->id }}/edit">Update</a>
-                                            <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
+                                            <button type="submit" class="btn btn-danger btn-xs">
                                                 Delete
                                             </button>
                                             {{ method_field('DELETE') }}

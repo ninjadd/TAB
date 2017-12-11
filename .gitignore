@@ -13,6 +13,7 @@ npm-debug.log
 .idea/workspace.xml
 .idea
 .DS_Store
+*/.DS_Store
 .idea/workspace.xml
 public/.DS_Store
 resources/.DS_Store

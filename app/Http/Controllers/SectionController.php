@@ -36,7 +36,7 @@ class SectionController extends Controller
         $request->user()->authorizeRoles(['master', 'admin', 'manager']);
         $organization = auth()->user()->organizations()->first();
         $users = $organization->users;
-        $sections = Section::where('department_id', $department->id)->get();
+        $sections = Section::with('assignedTo')->where('department_id', $department->id)->get();
 
         return view('sections.create', compact('department', 'users', 'sections'));
     }

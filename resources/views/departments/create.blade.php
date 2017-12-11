@@ -69,7 +69,7 @@
                                                 Manage
                                                 <span class="badge">{{ $department->sections->count() }}</span>
                                             </a>
-                                            <button type="submit" class="btn btn-danger btn-xs"  data-toggle="tooltip" title="Delete Type">
+                                            <button type="submit" class="btn btn-danger btn-xs">
                                                 Delete
                                             </button>
                                             {{ method_field('DELETE') }}
