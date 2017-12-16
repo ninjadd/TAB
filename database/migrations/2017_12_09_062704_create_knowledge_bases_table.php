@@ -20,6 +20,8 @@ class CreateKnowledgeBasesTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('body');
+            $table->integer('levelable_id');
+            $table->string('levelable_type');
             $table->softDeletes();
             $table->timestamps();
         });

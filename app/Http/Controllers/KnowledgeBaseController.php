@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Division;
+use App\Organization;
 use App\KnowledgeBase;
 use Carbon\Carbon;
-use foo\bar;
 use Illuminate\Http\Request;
 
 class KnowledgeBaseController extends Controller
@@ -30,14 +31,17 @@ class KnowledgeBaseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Request $request)
     {
-        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
-        $organization = auth()->user()->organizations->first();
+        $user = auth()->user();
+        $user->authorizeRoles(['master', 'admin', 'manager']);
+        $organization = Organization::where('user_id', $user->id)->first();
+        $divisions = Division::with('assignedTo')->where('organization_id', $organization->id)->get();
 
-        return view('knowledge-bases.create', compact('organization'));
+        return view('knowledge-bases.create', compact('organization', 'divisions'));
     }
 
     /**
@@ -50,8 +54,12 @@ class KnowledgeBaseController extends Controller
     {
         $request->validate([
             'title' => 'required|string|min:3',
-            'body' => 'required|string|min:3'
+            'body' => 'required|string|min:3',
+            'level_id' => 'required|string'
         ]);
+        $level_id = explode('|', $request->level_id);
+        $levelable_type = $level_id[0];
+        $levelable_id = $level_id[1];
 
         $knowledgeBase = new KnowledgeBase();
         $knowledgeBase->user_id = auth()->id();
@@ -59,6 +67,8 @@ class KnowledgeBaseController extends Controller
         $knowledgeBase->title = $request->title;
         $knowledgeBase->slug = str_slug($request->title).'-'.Carbon::now()->timestamp;
         $knowledgeBase->body = $request->body;
+        $knowledgeBase->levelable_id = $levelable_id;
+        $knowledgeBase->levelable_type = $levelable_type;
         $knowledgeBase->save();
 
         return redirect(route('knowledge-bases.index'))->with('success', 'You just added a new Best Practice to your Organization. Huzzah!');
@@ -81,11 +91,14 @@ class KnowledgeBaseController extends Controller
      * @param  \App\KnowledgeBase  $knowledgeBase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, KnowledgeBase $knowledgeBase)
+    public function edit(KnowledgeBase $knowledgeBase)
     {
-        $request->user()->authorizeRoles(['master', 'admin', 'manager']);
+        $user = auth()->user();
+        $user->authorizeRoles(['master', 'admin', 'manager']);
+        $organization = Organization::where('user_id', $user->id)->first();
+        $divisions = Division::with('assignedTo')->where('organization_id', $organization->id)->get();
 
-        return view('knowledge-bases.edit', compact('knowledgeBase'));
+        return view('knowledge-bases.edit', compact('knowledgeBase', 'organization', 'divisions'));
     }
 
     /**
@@ -99,13 +112,19 @@ class KnowledgeBaseController extends Controller
     {
         $request->validate([
             'title' => 'required|string|min:3',
-            'body' => 'required|string|min:3'
+            'body' => 'required|string|min:3',
+            'level_id' => 'required|string'
         ]);
+        $level_id = explode('|', $request->level_id);
+        $levelable_type = $level_id[0];
+        $levelable_id = $level_id[1];
 
         $knowledgeBase->user_id = auth()->id();
         $knowledgeBase->title = $request->title;
         $knowledgeBase->slug = str_slug($request->title).'-'.Carbon::now()->timestamp;
         $knowledgeBase->body = $request->body;
+        $knowledgeBase->levelable_id = $levelable_id;
+        $knowledgeBase->levelable_type = $levelable_type;
         $knowledgeBase->update();
 
         return back()->with('success', 'Updated Best Practice! Good Job.');
@@ -114,8 +133,9 @@ class KnowledgeBaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\KnowledgeBase  $knowledgeBase
-     * @return \Illuminate\Http\Response
+     * @param KnowledgeBase $knowledgeBase
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(KnowledgeBase $knowledgeBase)
     {

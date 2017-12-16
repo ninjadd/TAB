@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="#">Documentation</a>
+                    <a href="/forum">Forum</a>
                     <a href="#">TABcasts</a>
                     <a href="#">News</a>
                     <a href="#">Forge</a>

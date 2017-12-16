@@ -59,4 +59,12 @@ class Section extends Model
     {
         return $this->belongsTo('App\User', 'assigned_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function levels()
+    {
+        return $this->morphMany('App\KnowledgeBase', 'levelable');
+    }
 }

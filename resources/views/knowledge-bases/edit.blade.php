@@ -23,6 +23,45 @@
                             {{ method_field('PUT') }}
                             <fieldset>
                                 <div class="form-group">
+                                    <label class="col-lg-2 control-label">Organization Sections</label>
+                                    <div class="col-lg-10">
+                                        <ul style="list-style: none;">
+                                            @foreach($divisions->load('departments') as $division)
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" {!! ($knowledgeBase->levelable_type.'|'.$knowledgeBase->levelable_id == 'App\Division|'.$division->id) ? 'checked="checked"' : null !!} required="required" name="level_id" value="App\Division|{{ $division->id }}">
+                                                        {{ $division->title }} > {{ $division->assignedTo->name }}
+                                                    </label>
+                                                </li>
+                                                @if($division->departments->count() > 0)
+                                                    <ul style="list-style: none;">
+                                                        @foreach($division->departments->load(['assignedTo', 'sections']) as $department)
+                                                            <li>
+                                                                <label>
+                                                                    <input type="radio" {!! ($knowledgeBase->levelable_type.'|'.$knowledgeBase->levelable_id == 'App\Department|'.$department->id) ? 'checked="checked"' : null !!} required="required" name="level_id" value="App\Department|{{ $department->id }}">
+                                                                    {{ $department->title }} > {{ $department->assignedTo->name }}
+                                                                </label>
+                                                            </li>
+                                                            @if($department->sections->count() > 0)
+                                                                <ul style="list-style: none;">
+                                                                    @foreach($department->sections->load('assignedTo') as $section)
+                                                                        <li>
+                                                                            <label>
+                                                                                <input type="radio" {!! ($knowledgeBase->levelable_type.'|'.$knowledgeBase->levelable_id == 'App\Section|'.$section->id) ? 'checked="checked"' : null !!} required="required" name="level_id" value="App\Section|{{ $section->id }}">
+                                                                                {{ $section->title }} > {{ $section->assignedTo->name }}
+                                                                            </label>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="title" required="required" value="{{ $knowledgeBase->title }}" class="form-control" id="inputTitle" placeholder="This is a great best practice">

@@ -67,4 +67,12 @@ class Division extends Model
     {
         return $this->hasMany('App\Department');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function levels()
+    {
+        return $this->morphMany('App\KnowledgeBase', 'levelable');
+    }
 }

@@ -66,16 +66,4 @@ Route::put('sections/{section}', 'SectionController@update');
 Route::delete('sections/{section}', 'SectionController@destroy');
 
 /* KnowledgeBase Routes */
-Route::get('knowledge-bases', 'KnowledgeBaseController@index')->name('knowledge-bases.index');
-
-Route::get('knowledge-bases/create', 'KnowledgeBaseController@create');
-
-Route::post('knowledge-bases', 'KnowledgeBaseController@store');
-
-Route::get('knowledge-bases/{knowledgeBase}', 'KnowledgeBaseController@show');
-
-Route::get('knowledge-bases/{knowledgeBase}/edit', 'KnowledgeBaseController@edit');
-
-Route::put('knowledge-bases/{knowledgeBase}', 'KnowledgeBaseController@update');
-
-Route::delete('knowledge-bases/{knowledgeBase}', 'KnowledgeBaseController@destroy');
+Route::resource('knowledge-bases', 'KnowledgeBaseController');

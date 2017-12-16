@@ -12,7 +12,7 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Add Policy {{ $organization->name }}
+                            Add Best Practice for the {{ $organization->name }}
                         </h3>
                     </div>
 
@@ -20,6 +20,45 @@
                         <form class="form-horizontal" action="/knowledge-bases" method="POST" autocomplete="off">
                             {{ csrf_field() }}
                             <fieldset>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Organization Sections</label>
+                                    <div class="col-lg-10">
+                                        <ul style="list-style: none;">
+                                            @foreach($divisions->load('departments') as $division)
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" required="required" name="level_id" value="App\Division|{{ $division->id }}">
+                                                        {{ $division->title }} > {{ $division->assignedTo->name }}
+                                                    </label>
+                                                </li>
+                                                @if($division->departments->count() > 0)
+                                                    <ul style="list-style: none;">
+                                                        @foreach($division->departments->load(['assignedTo', 'sections']) as $department)
+                                                            <li>
+                                                                <label>
+                                                                    <input type="radio" required="required" name="level_id" value="App\Department|{{ $department->id }}">
+                                                                    {{ $department->title }} > {{ $department->assignedTo->name }}
+                                                                </label>
+                                                            </li>
+                                                            @if($department->sections->count() > 0)
+                                                                <ul style="list-style: none;">
+                                                                    @foreach($department->sections->load('assignedTo') as $section)
+                                                                        <li>
+                                                                            <label>
+                                                                                <input type="radio" required="required" name="level_id" value="App\Section|{{ $section->id }}">
+                                                                                {{ $section->title }} > {{ $section->assignedTo->name }}
+                                                                            </label>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="inputTitle" class="col-lg-2 control-label">Title</label>
                                     <div class="col-lg-10">

@@ -24,6 +24,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
+                                <th>Level</th>
                                 <th>Managed by</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
@@ -34,6 +35,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Title</th>
+                                <th>Level</th>
                                 <th>Managed by</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
@@ -51,7 +53,10 @@
                                             {{ $knowledgeBase->title }}
                                         </td>
                                         <td>
-                                            {{ $knowledgeBase->user->name }}
+                                            {{ $knowledgeBase->levelable->title }}
+                                        </td>
+                                        <td>
+                                            {{ $knowledgeBase->levelable->assignedTo->name }}
                                         </td>
                                         <td>
                                             {{ $knowledgeBase->created_at->toDayDateTimeString() }}

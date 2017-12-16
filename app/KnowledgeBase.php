@@ -43,4 +43,12 @@ class KnowledgeBase extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function levelable()
+    {
+        return $this->morphTo();
+    }
 }
