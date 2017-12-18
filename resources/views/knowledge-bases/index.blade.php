@@ -28,7 +28,7 @@
                                 <th>Managed by</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th></th>
+                                <th width="150"></th>
                             </tr>
                             </thead>
                             <tfoot>

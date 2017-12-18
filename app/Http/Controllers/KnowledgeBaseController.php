@@ -71,6 +71,14 @@ class KnowledgeBaseController extends Controller
         $knowledgeBase->levelable_type = $levelable_type;
         $knowledgeBase->save();
 
+        if ($request->home == 'true') {
+            return redirect(route('home'))->with('success', 'You just added a new Best Practice to your Organization. Huzzah!');
+        }
+
+        if ($request->home == 'back') {
+            return back()->with('success', 'You just added a new Best Practice to your Organization. Huzzah!');
+        }
+
         return redirect(route('knowledge-bases.index'))->with('success', 'You just added a new Best Practice to your Organization. Huzzah!');
     }
 

@@ -1,3 +1,5 @@
+@include('shared.editor')
+
 <div class="container-fluid">
     <div class="col-md-4">
         <div class="panel panel-success">
@@ -96,9 +98,49 @@
                                     </button>
                                     {{ method_field('DELETE') }}
                                     {{ csrf_field() }}
+                                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target=".{{ $division->id }}-modal">Best Practice</button>
                                 </form>
                             </li>
                         </ul>
+
+                        <div class="modal fade {{ $division->id }}-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">
+                                            Add Best Practice for the {{ $organization->name }} > {{ $division->title }}
+                                        </h4>
+                                    </div>
+                                    <form class="form-horizontal" action="/knowledge-bases" method="POST" autocomplete="off">
+                                        <div class="modal-body">
+                                            {{ csrf_field() }}
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <label for="inputTitle" class="control-label">Title</label>
+                                                        <input type="text" name="title" required="required" value="{{ old('title') }}" class="form-control" id="inputTitle" placeholder="This is a great best practice">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <label for="textAreaDescription" class="control-label">Body</label>
+                                                        <textarea required="required" name="body" class="form-control modalText" id="textArea" placeholder="">{{ old('body') }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="level_id" value="App\Division|{{ $division->id }}">
+                                            <input type="hidden" name="home" value="true">
+                                            <button type="submit" class="pull-left btn btn-primary">Add</button>
+                                            <button type="button" class="pull-left btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
