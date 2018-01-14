@@ -28,8 +28,12 @@ class HomeController extends Controller
 
         $user = auth()->user();
         $organization = $user->organizations->first();
-        $divisions = Division::with(['departments', 'assignedTo'])->where('organization_id', $organization->id)->get();
+        if ($organization) {
+            $divisions = Division::with(['departments', 'assignedTo'])->where('organization_id', $organization->id)->get();
 
-        return view('home.index', compact('user', 'organization', 'divisions'));
+            return view('home.index', compact('user', 'organization', 'divisions'));
+        }
+
+        return view('home.index', compact('user'));
     }
 }
